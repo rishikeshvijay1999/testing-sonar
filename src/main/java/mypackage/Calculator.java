@@ -39,7 +39,14 @@ public class Calculator extends HttpServlet {
 
         // Introduce a vulnerability by not properly handling resources
         // Potential resource leak if connection fails to close
-        return DriverManager.getConnection(jdbcUrl, jdbcUser, jdbcPassword);
+       // return DriverManager.getConnection(jdbcUrl, jdbcUser, jdbcPassword);
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, jdbcUser, jdbcPassword)) {
+    // Use the connection
+    // ...
+} catch (SQLException e) {
+    e.printStackTrace();
+}
+
     }
 
     private void saveToDatabase(String operation, long result) {
