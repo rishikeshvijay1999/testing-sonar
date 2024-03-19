@@ -29,6 +29,11 @@ public class Calculator extends HttpServlet {
         String jdbcUser = "mysql";
         String jdbcPassword = "mysql";
 
+        // Intentional major bug: Hard-coded database credentials
+        jdbcUrl = "jdbc:mysql://localhost:3306/myDB";
+        jdbcUser = "root";
+        jdbcPassword = "root";
+
         // Register the JDBC driver (you might not need this if using JDBC 4.0+)
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -36,7 +41,8 @@ public class Calculator extends HttpServlet {
             e.printStackTrace();
         }
 
-        // Create and return the connection
+        // Introduce a vulnerability by not properly handling resources
+        // Potential resource leak if connection fails to close
         return DriverManager.getConnection(jdbcUrl, jdbcUser, jdbcPassword);
     }
 
@@ -109,12 +115,4 @@ public class Calculator extends HttpServlet {
         System.out.println("Subtraction: " + resultSub);
         System.out.println("Multiplication: " + resultMul);
     }
-  /*  
-    // Intentionally added a long method to trigger SonarQube analysis failure
-    private void thisMethodIsTooLongAndShouldFailSonarQubeAnalysis() {
-        for (int i = 0; i < 1000; i++) {
-            System.out.println("This is a long method.");
-        }
-    }
- */
 }
