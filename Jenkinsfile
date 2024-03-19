@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout code from Git repository
-                git branch: 'main', url: 'https://github.com/beeru405/calculator-basic.git'
+                git branch: 'main', url: 'https://github.com/beeru405/testing-sonar.git'
             }
         }
 
