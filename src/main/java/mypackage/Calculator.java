@@ -29,10 +29,6 @@ public class Calculator extends HttpServlet {
         String jdbcUser = "mysql";
         String jdbcPassword = "mysql";
 
-        // Intentional major bug: Hard-coded database credentials
-       // jdbcUrl = "jdbc:mysql://localhost:3306/myDB";
-      //  jdbcUser = "root";
-     //   jdbcPassword = "root";
 
         // Register the JDBC driver (you might not need this if using JDBC 4.0+)
         try {
