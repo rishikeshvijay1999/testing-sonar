@@ -41,8 +41,7 @@ public class Calculator extends HttpServlet {
         // Potential resource leak if connection fails to close
        // return DriverManager.getConnection(jdbcUrl, jdbcUser, jdbcPassword);
         try (Connection connection = DriverManager.getConnection(jdbcUrl, jdbcUser, jdbcPassword)) {
-    // Use the connection
-    // ...
+            return DriverManager.getConnection(jdbcUrl, jdbcUser, jdbcPassword);
 } catch (SQLException e) {
     e.printStackTrace();
 }
