@@ -46,9 +46,7 @@ public class Calculator extends HttpServlet {
 } catch (SQLException e) {
     e.printStackTrace();
 }
-
     }
-
     private void saveToDatabase(String operation, long result) {
         try (Connection connection = getDBConnection()) {
             connection.setAutoCommit(false); // Disable auto-commit
