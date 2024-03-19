@@ -26,9 +26,8 @@ public class Calculator extends HttpServlet {
     private Connection getDBConnection() throws SQLException {
         // Hard-coded database credentials (Major Vulnerability)
         String jdbcUrl = "jdbc:mysql://192.168.138.114:3306/myDB";
-        String jdbcUser = "DB_USER";
-        String jdbcPassword = "DB_PASSWORD";
-
+        String jdbcUser = "mysql";
+        String jdbcPassword = "mysql";
 
         // Register the JDBC driver (you might not need this if using JDBC 4.0+)
         try {
@@ -37,15 +36,10 @@ public class Calculator extends HttpServlet {
             e.printStackTrace();
         }
 
-        // Introduce a vulnerability by not properly handling resources
-        // Potential resource leak if connection fails to close
-       // return DriverManager.getConnection(jdbcUrl, jdbcUser, jdbcPassword);
-        try (Connection connection = DriverManager.getConnection(jdbcUrl, jdbcUser, jdbcPassword)) {
-} catch (SQLException e) {
-    e.printStackTrace();
-}
-    return DriverManager.getConnection(jdbcUrl, jdbcUser, jdbcPassword);
+        // Create and return the connection
+        return DriverManager.getConnection(jdbcUrl, jdbcUser, jdbcPassword);
     }
+
     private void saveToDatabase(String operation, long result) {
         try (Connection connection = getDBConnection()) {
             connection.setAutoCommit(false); // Disable auto-commit
@@ -68,20 +62,12 @@ public class Calculator extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       try {
-            processRequest(request, response);
-        } catch (Exception e) {
-            e.printStackTrace(); // Introducing a major bug by only printing the stack trace without handling the exception properly
-        }
-        }
+        processRequest(request, response);
+    }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (Exception e) {
-            e.printStackTrace(); // Introducing a major bug by only printing the stack trace without handling the exception properly
-        }
-        }
+        processRequest(request, response);
+    }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
@@ -123,4 +109,12 @@ public class Calculator extends HttpServlet {
         System.out.println("Subtraction: " + resultSub);
         System.out.println("Multiplication: " + resultMul);
     }
+  /*  
+    // Intentionally added a long method to trigger SonarQube analysis failure
+    private void thisMethodIsTooLongAndShouldFailSonarQubeAnalysis() {
+        for (int i = 0; i < 1000; i++) {
+            System.out.println("This is a long method.");
+        }
+    }
+ */
 }
