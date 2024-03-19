@@ -62,19 +62,11 @@ public class Calculator extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (Exception e) {
-            e.printStackTrace(); // Introducing a major bug by only printing the stack trace without handling the exception properly
-        }
+        processRequest(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (Exception e) {
-            e.printStackTrace(); // Introducing a major bug by only printing the stack trace without handling the exception properly
-        }
+        processRequest(request, response);
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
