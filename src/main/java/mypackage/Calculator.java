@@ -41,10 +41,10 @@ public class Calculator extends HttpServlet {
         // Potential resource leak if connection fails to close
        // return DriverManager.getConnection(jdbcUrl, jdbcUser, jdbcPassword);
         try (Connection connection = DriverManager.getConnection(jdbcUrl, jdbcUser, jdbcPassword)) {
-            return DriverManager.getConnection(jdbcUrl, jdbcUser, jdbcPassword);
 } catch (SQLException e) {
     e.printStackTrace();
 }
+    return DriverManager.getConnection(jdbcUrl, jdbcUser, jdbcPassword);
     }
     private void saveToDatabase(String operation, long result) {
         try (Connection connection = getDBConnection()) {
